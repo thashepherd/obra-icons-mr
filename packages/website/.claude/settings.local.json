@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(afplay:*)",
+      "Bash(gh api:*)"
+    ]
+  }
+}

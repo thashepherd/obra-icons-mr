@@ -4,6 +4,7 @@
 		| 'downloadPng'
 		| 'copySvelteImport'
 		| 'copyReactImport'
+		| 'copyVueImport'
 		| 'copySvg'
 		| 'copyPng';
 </script>
@@ -50,6 +51,12 @@
 						`import { ${namePascal} } from 'obra-icons-react'`,
 					);
 					toastMessage = 'Copied React import!';
+					break;
+				case 'copyVueImport':
+					await copyToClipboard(
+						`import { ${namePascal} } from 'obra-icons-vue'`,
+					);
+					toastMessage = 'Copied Vue import!';
 					break;
 				case 'copySvg':
 					await copyToClipboard(svg);

@@ -214,6 +214,7 @@
                     iconProperties.color.value = color
                     previousColor = color
                 }
+                settingsLoaded = true
             }
         }
     }
@@ -225,13 +226,14 @@
 
     let previousColor = '#000000'
     let isIconColorInvisible = false
+    let settingsLoaded = false
 
     $: {
         if (iconType) {
             searchIcons()
         }
 
-        if (iconProperties.size) {
+        if (settingsLoaded && iconProperties.size) {
             parent.postMessage(
                 {
                     pluginMessage: {

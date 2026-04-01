@@ -1,6 +1,9 @@
 <script lang="ts">
-	import { IconArrowRight, IconCaretDownFill } from 'obra-icons-svelte';
+	import { IconArrowRight, IconCaretDownFill, IconChevronDown } from 'obra-icons-svelte';
+	import FigmaIcon from '$lib/components/icons/FigmaIcon.svelte';
+	import FramerIcon from '$lib/components/icons/FramerIcon.svelte';
 	import GithubIcon from '$lib/components/icons/GithubIcon.svelte';
+	import NpmIcon from '$lib/components/icons/NpmIcon.svelte';
 	import SearchInput from '$lib/components/SearchInput.svelte';
 	import Icon, { type ActionType } from '$lib/Icon.svelte';
 	import { iconSearch } from '$lib/icon-search.svelte';
@@ -11,6 +14,7 @@
 	let strokeWeight = $state(1.5);
 	let color = $state('#000000');
 	let size = $state(24);
+	let packageDropdownOpen = $state(false);
 </script>
 
 <svelte:head>
@@ -31,24 +35,62 @@
 					</p>
 
 					<div class="justify-content-center button-group">
+						<div class="package-dropdown">
+							<button
+								class="button inverse"
+								onclick={() => (packageDropdownOpen = !packageDropdownOpen)}
+							>
+								<span class="icon-fill-wrapper"><NpmIcon /></span>
+								<span>Choose code package</span>
+								<IconChevronDown />
+							</button>
+							{#if packageDropdownOpen}
+								<div class="package-dropdown-menu">
+									<a
+										href="https://www.npmjs.com/package/obra-icons-svelte"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Svelte
+										<IconArrowRight />
+									</a>
+									<a
+										href="https://www.npmjs.com/package/obra-icons-react"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										React
+										<IconArrowRight />
+									</a>
+									<a
+										href="https://www.npmjs.com/package/obra-icons-vue"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Vue
+										<IconArrowRight />
+									</a>
+								</div>
+							{/if}
+						</div>
 						<a
 							class="button inverse"
-							href="https://www.npmjs.com/package/obra-icons-svelte"
+							href="https://www.figma.com/community/plugin/1417969026159731234/obra-icons"
+							target="_blank"
+							rel="noopener noreferrer"
 						>
-							<span class="icon-fill-wrapper">
-								<GithubIcon />
-							</span>
-							<span>Svelte package</span>
+							<span class="icon-fill-wrapper"><FigmaIcon /></span>
+							<span>Figma plugin</span>
 							<IconArrowRight />
 						</a>
 						<a
 							class="button inverse"
-							href="https://www.npmjs.com/package/obra-icons-react"
+							href="https://www.framer.com/marketplace/plugins/obra-icons/"
+							target="_blank"
+							rel="noopener noreferrer"
 						>
-							<span class="icon-fill-wrapper">
-								<GithubIcon />
-							</span>
-							<span>React package</span>
+							<span class="icon-fill-wrapper"><FramerIcon /></span>
+							<span>Framer plugin</span>
 							<IconArrowRight />
 						</a>
 					</div>
@@ -103,6 +145,9 @@
 							</option>
 							<option value="copyReactImport">
 								Copy React import
+							</option>
+							<option value="copyVueImport">
+								Copy Vue import
 							</option>
 						</select>
 						<IconCaretDownFill />
@@ -259,5 +304,61 @@
 
 	.hero h2 {
 		margin: 0;
+	}
+
+	.hero :global(.button-group) {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	@media (max-width: 640px) {
+		.hero :global(.button-group) {
+			flex-direction: column;
+			width: 100%;
+		}
+
+		.hero :global(.button-group .button) {
+			width: 100%;
+		}
+	}
+
+	.package-dropdown {
+		position: relative;
+	}
+
+	.package-dropdown-menu {
+		position: absolute;
+		top: calc(100% + 0.5rem);
+		left: 50%;
+		transform: translateX(-50%);
+		background: #fff;
+		border-radius: 1rem;
+		padding: 0.5rem;
+		display: flex;
+		flex-direction: column;
+		min-width: 10rem;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+		z-index: 10;
+	}
+
+	.package-dropdown-menu a {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.5rem 0.75rem;
+		color: #000;
+		text-decoration: none;
+		font-weight: 500;
+		border-radius: 0.5rem;
+	}
+
+	.package-dropdown-menu a:hover {
+		background: #f0f0f0;
+	}
+
+	.package-dropdown-menu a :global(svg) {
+		width: 1rem;
+		height: 1rem;
+		opacity: 0.4;
 	}
 </style>

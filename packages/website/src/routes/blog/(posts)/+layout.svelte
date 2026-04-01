@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { formatDate } from '$lib/blog/utils.js';
-	import Callout from '$lib/components/Callout.svelte';
-
 	let { data } = $props();
 </script>
 
@@ -43,8 +41,6 @@
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 			{@html data.content}
 		</div>
-
-		<Callout />
 	</article>
 </div>
 
